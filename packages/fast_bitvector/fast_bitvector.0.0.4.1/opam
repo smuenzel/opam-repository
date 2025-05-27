@@ -1,0 +1,44 @@
+opam-version: "2.0"
+synopsis: "A bitvector library"
+description: "Bitvector represented as bytes internally"
+maintainer: ["Stefan Muenzel <source@s.muenzel.net>"]
+authors: ["Stefan Muenzel <source@s.muenzel.net>"]
+license: "MPL-2.0"
+tags: ["bitvector" "bitset"]
+homepage: "https://github.com/engineeredabstraction/fast_bitvector"
+bug-reports: "https://github.com/engineeredabstraction/fast_bitvector/issues"
+build: [
+  ["dune" "subst"] {dev}
+  [
+    "dune"
+    "build"
+    "-p"
+    name
+    "-j"
+    jobs
+    "@install"
+    "@runtest" {with-test}
+    "@doc" {with-doc}
+  ]
+]
+dev-repo: "git+https://github.com/engineeredabstraction/fast_bitvector.git"
+x-maintenance-intent: ["(latest)"]
+depends: [
+  "dune" {>= "3.18"}
+  (("ocaml" {>= "4.14.0" & <"5.1.0"}) | ("ocaml" {>= "5.1.0"} & "ocaml_intrinsics_kernel"))
+  "ppx_sexp_conv"
+  "ppx_sexp_value" { >= "0.16.0" }
+  "expect_test_helpers_core" {with-test}
+  "ppx_jane" {with-test}
+  "odoc" {with-doc}
+]
+available: (arch != "arm32") & (arch != "x86_32") & (arch != "ppc32") & (arch != "s390x")
+url {
+  src:
+    "https://github.com/engineeredabstraction/fast_bitvector/releases/download/0.0.4.1/fast_bitvector-0.0.4.1.tbz"
+  checksum: [
+    "sha256=f3d7d54f00ccd01f0efe5c0648424e36c26aff2a861c78ac0d6b921909d18a7c"
+    "sha512=a38bfa7a6e919f10c2d8c36d99cd2c53ee6a25e46b2346ac56f0b23df2e13dbdecaa80edac6107af40dd36e787210ad61ea691a3db0616c6e56b0faa7f85883c"
+  ]
+}
+x-commit-hash: "bb6b1924566a4dbf71e07854e398e29a3723e393"
