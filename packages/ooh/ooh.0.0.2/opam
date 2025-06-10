@@ -1,0 +1,45 @@
+opam-version: "2.0"
+synopsis: "OCaml out-of-heap"
+description: "Out-of-heap data"
+maintainer: ["Stefan Muenzel"]
+authors: ["Stefan Muenzel"]
+license: "MPL-2.0"
+tags: ["out-of-heap"]
+homepage: "https://github.com/engineeredabstraction/ooh"
+doc: "https://url/to/documentation"
+bug-reports: "https://github.com/engineeredabstraction/ooh/issues"
+depends: [
+  "ocaml" {>= "4.12"}
+  "dune" {>= "3.16"}
+  "typerep"
+  "cinaps"
+  "ppx_jane" {with-test}
+  "ppx_optional"
+  "ppx_pipebang"
+  "ppx_typerep_conv"
+  "odoc" {with-doc}
+]
+build: [
+  ["dune" "subst"] {dev}
+  [
+    "dune"
+    "build"
+    "-p"
+    name
+    "-j"
+    jobs
+    "@install"
+    "@runtest" {with-test}
+    "@doc" {with-doc}
+  ]
+]
+dev-repo: "git+https://github.com/engineeredabstraction/ooh.git"
+url {
+  src:
+    "https://github.com/engineeredabstraction/ooh/releases/download/0.0.2/ooh-0.0.2.tbz"
+  checksum: [
+    "sha256=3731a233cc672666a1309bd86426a13160d525ca7465cffafecc8908fbadce60"
+    "sha512=e32c7d7e8a50dfa6bf81a4853eae6cd5b80d19d6dcd18ca550925de42c83502708d6054c37778b4258b29238e985cc675a0e38ece5ed026c97779a1a30c0da39"
+  ]
+}
+x-commit-hash: "8336b4ba997e25abc599ef49db8d1637ae82e20d"
