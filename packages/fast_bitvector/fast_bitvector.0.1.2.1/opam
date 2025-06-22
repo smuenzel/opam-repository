@@ -1,0 +1,52 @@
+opam-version: "2.0"
+synopsis: "A bitvector library"
+description: "Bitvector represented as bytes internally"
+maintainer: ["Stefan Muenzel <source@s.muenzel.net>"]
+authors: ["Stefan Muenzel <source@s.muenzel.net>"]
+license: "MPL-2.0"
+tags: ["bitvector" "bitset"]
+homepage: "https://github.com/engineeredabstraction/fast_bitvector"
+bug-reports: "https://github.com/engineeredabstraction/fast_bitvector/issues"
+build: [
+  ["dune" "subst"] {dev}
+  [
+    "dune"
+    "build"
+    "-p"
+    name
+    "-j"
+    jobs
+    "@install"
+    "@runtest" {with-test}
+    "@doc" {with-doc}
+  ]
+]
+dev-repo: "git+https://github.com/engineeredabstraction/fast_bitvector.git"
+x-maintenance-intent: ["(latest)"]
+depends: [
+  "dune" {>= "3.18"}
+  ( ("ocaml" {>= "4.14.0" & <"5.1.0"})
+  | ("ocaml" {>= "5.1.0" & < "5.4.0"} & "ocaml_intrinsics_kernel" { arch != "arm32" & arch != "x86_32" })
+  | ("ocaml" {>= "5.4.0"}
+    & "ocaml_intrinsics_kernel" { arch != "arm32" & arch != "x86_32" }
+    & "ppxlib_jane" {>= "v0.17.4"}
+    )
+  )
+  "ppx_sexp_conv"
+  "ppx_sexp_value" { >= "v0.16.0" }
+  "ppx_cold" { >= "v0.16.0" }
+  "expect_test_helpers_core" {with-test}
+  "ppx_jane" {with-test}
+  "odoc" {with-doc}
+  "qcheck-core" {with-test}
+  "ppx_optcomp" {with-test}
+]
+url {
+  src:
+    "https://github.com/engineeredabstraction/fast_bitvector/releases/download/0.1.2.1/fast_bitvector-0.1.2.1.tbz"
+  checksum: [
+    "sha256=42d466c601b4b173c3de07c99e77aaf099d4bcf7b417ce220a0d858a63885062"
+    "sha512=746a95b6514e1d8bf2df3edfa88e273fb835217c6da9fe2c6c5847b77130f1991b5db38da0c21ee16a429f72d411a286ea36a18ce5fed67d3de363d2d7c00d9b"
+  ]
+}
+x-commit-hash: "0893dc0bf28f23159c151c4f7b12324a4d42ddd7"
